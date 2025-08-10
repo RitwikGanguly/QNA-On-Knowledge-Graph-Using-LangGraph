@@ -48,20 +48,9 @@ Let's use an analogy:
 | **Suitability for Your Task** | Good for **simple, direct lookups** on a graph. | Essential for **complex, multi-source, high-stakes question answering** where reliability and explainability are paramount. |
 
 
-### Why LangGraph is the Definitive Choice for Your Biomedical KG Project
-Let's translate this table into the specific problems you've faced and solved:
-You Solved the "I Don't Know" Failure:
-With LangChain: The GraphCypherQAChain got the data but failed to synthesize it, leaving you with no answer and no clue why.
-With LangGraph: This failure is now architecturally impossible. The execute_cypher_node successfully puts the 100 results into the state. The generate_response_node is a separate step whose sole job is to turn that data into a sentence. You have full control over its prompt and logic, ensuring it always produces a meaningful output.
-You Needed to Combine the KG and a Vector Store:
-With LangChain: This is architecturally awkward. You would have to retrieve from the vector store first, then try to stuff that context into the question you pass to the GraphCypherQAChain, hoping it uses it correctly.
-With LangGraph: This is elegant. The two retrieval processes run as parallel or sequential nodes, both contributing their findings to the central GraphState. The final synthesis node is explicitly designed to be the "merger" of this information. It's clean and predictable.
-Your KG Requires Expert-Level Cypher Queries:
-With LangChain: The default prompt is generic. It wouldn't know to use OPTIONAL MATCH or to group your specific biological relationships logically.
-With LangGraph: Your generate_cypher_node is now a highly specialized "expert." It's armed with your custom, detailed prompt that knows the nuances of your schema, leading to far more accurate and comprehensive queries.
-Trust and Explainability are Critical in Biomedicine:
-With LangChain: If you get an answer, how do you trust it? You can't easily see the exact Cypher query that was run or the raw data it returned.
-With LangGraph: You have a perfect audit trail. For any given answer, you can show the user (or a fellow researcher) the exact entities extracted, the precise Cypher query generated, and the raw data that formed the basis of the final natural language answer. This is essential for any scientific or medical application.
+### Flowchart
+
+![flowchart](https://github.com/RitwikGanguly/QNA-On-Knowledge-Graph-Using-LangGraph/blob/main/flowchart_kg_qna_langgraph.png)
 
 
 
